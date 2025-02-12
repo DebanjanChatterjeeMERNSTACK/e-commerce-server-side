@@ -35,11 +35,12 @@ const PORT = process.env.PORT
 
 
 const corsOptions = {
-  origin: "http://localhost:5173", // Allow only frontend
+  origin: '*', // Allow only frontend
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization", "login_id"], // Allow custom headers
 };
+app.use(cors(corsOptions));
 app.use(cors())
 
 app.use(express.json())
