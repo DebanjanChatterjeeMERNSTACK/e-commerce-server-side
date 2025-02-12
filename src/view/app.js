@@ -33,13 +33,12 @@ const PORT = process.env.PORT
 
 
 
-const corsOptions = {
-    origin: "*",
-    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-    credentials: true,
-    optionsSuccessStatus: 200,
-  };
-  app.use(cors(corsOptions));
+
+app.use(cors({
+  origin: '*', // Allow all origins (Not recommended for production)
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(cors())
 
 app.use(express.json())

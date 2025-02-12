@@ -25,7 +25,6 @@ const upload = multer({ storage: storage });
 route.post(
   "/catagory_save",
   upload.single("product_Catagory_Image"),
-  catagory_middileware,
   async (req, res) => {
     const { login_id, product_Catagory_Name } = req.body;
 
