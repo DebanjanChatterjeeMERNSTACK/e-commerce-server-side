@@ -132,7 +132,7 @@ route.get("/product_edit/:id", async (req, res) => {
   const id = req.params["id"];
   try {
     const product = await Product.findOne({ _id: id }).select('-login_id');
-    if (Object.keys(product).length>0) {
+    if (product) {
       res.send({
         mess: "success",
         status: 200,
@@ -204,7 +204,7 @@ route.post(
             product_Weight: product_Weight,
           }
         );
-        if (Object.keys(product).length>0) {
+        if (product) {
           const delete_Image = product.product_Image.map((e) => {
             const part = e.split("/");
             return part[4];
@@ -251,7 +251,7 @@ route.post(
             product_Weight: product_Weight,
           }
         );
-        if (Object.keys(product).length>0) {
+        if (product) {
         
                 res.send({
                   mess: "success",
@@ -278,7 +278,7 @@ route.post("/product_delete", async (req, res) => {
   try {
     const product = await Product.findOneAndDelete({ _id: id }, { _id: id });
   
-    if (Object.keys(product).length>0) {
+    if (product) {
       const delete_Image = product.product_Image.map((e) => {
         const part = e.split("/");
         return part[4];

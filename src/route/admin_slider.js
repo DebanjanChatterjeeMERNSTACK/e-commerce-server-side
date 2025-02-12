@@ -89,7 +89,7 @@ route.get("/slider_edit/:id", async (req, res) => {
   const id = req.params["id"];
   try {
     const slider = await Slider.findOne({ _id: id }).select('-login_id');
-    if (Object.keys(slider).length>0) {
+    if (slider) {
       res.send({
         mess: "success",
         status: 200,
@@ -123,7 +123,7 @@ route.post(
             product_Catagory: product_Catagory,
           }
         );
-        if (Object.keys(slider).length>0) {
+        if (slider) {
           const delete_Image = slider.slider_Image.split("/");
           fs.unlink(`src/slider/${delete_Image[4]}`, (err) => {
             if (err) {
@@ -144,7 +144,7 @@ route.post(
             product_Catagory: product_Catagory,
           }
         );
-        if (Object.keys(slider).length>0) {
+        if (slider) {
           res.send({ mess: "success", status: 200, text: "Update complete" });
         } else {
           res.send({ mess: "error", status: 400, text: "Please Correct Id" });
@@ -163,7 +163,7 @@ route.post("/slider_delete", async (req, res) => {
   const id = req.body.id;
   try {
     const slider = await Slider.findOneAndDelete({ _id: id }, { _id: id });
-    if (Object.keys(slider).length>0) {
+    if (slider) {
       const delete_Image = slider.slider_Image.split("/");
       fs.unlink(`src/slider/${delete_Image[4]}`, (err) => {
         if (err) {

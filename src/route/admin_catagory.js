@@ -25,6 +25,7 @@ const upload = multer({ storage: storage });
 route.post(
   "/catagory_save",
   upload.single("product_Catagory_Image"),
+  catagory_middileware,
   async (req, res) => {
     const { login_id, product_Catagory_Name } = req.body;
 
@@ -65,7 +66,7 @@ route.get("/category_edit/:id", async (req, res) => {
   const id = req.params["id"];
   try {
     const category = await Catagory.findOne({ _id: id }).select('-login_id');
-    if (Object.keys(category).length >0) {
+    if (category) {
       res.send({
         mess: "success",
         status: 200,
@@ -102,7 +103,7 @@ route.post(
           }
         );
       
-        if (Object.keys(updatedCategory).length>0) {
+        if (updatedCategory) {
           
           const delete_Image =
             updatedCategory.product_Catagory_Image.split("/");
@@ -134,7 +135,7 @@ route.post(
           }
         );
        
-        if (Object.keys(updatedCategory).length>0) {
+        if (updatedCategory) {
           res.send({
             mess: "success",
             status: 200,
@@ -191,7 +192,7 @@ route.post("/catagory_delete", async (req, res) => {
   const id = req.body.id;
   try {
     const catagory = await Catagory.findOneAndDelete({ _id: id }, { _id: id });
-    if (Object.keys(catagory).length>0) {
+    if (catagory) {
       const delete_Image = catagory.product_Catagory_Image.split("/");
       fs.unlink(`src/catagory/${delete_Image[4]}`, (err) => {
         if (err) {

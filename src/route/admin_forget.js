@@ -9,14 +9,14 @@ route.post("/admin_forget", async (req, res) => {
   try {
     if (email && password) {
       const data = await registration.findOne({ email: email });
-      if (Object.keys(data).length>0) {
+      if (data) {
         const saltRounds = 10;
         const hass_password = await bcrypt.hash(password, saltRounds);
         const updata = await registration.findOneAndUpdate(
           { email: email },
           { password: hass_password }
         );
-        if (Object.keys(updata).length>0) {
+        if (updata) {
           res.send({
             mess: "success",
             status: 200,

@@ -14,7 +14,7 @@ route.post("/admin_login",async(req,res)=>{
     try {
     if(email && password){
         const data=await Registration.findOne({email:email})
-        if(Object.keys(data).length>0){
+        if(data){
             const match = await bcrypt.compare(password, data.password);
             if(match===true){     
                 jwt.sign({data},process.env.JWTKEY,{expiresIn:"24h"},(err,tokan)=>{

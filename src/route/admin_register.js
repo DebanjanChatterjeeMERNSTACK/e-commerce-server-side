@@ -11,7 +11,7 @@ route.post("/admin_resgitration", async (req, res) => {
   try{
     if (username && email && password) {
         const user = await registration.findOne({ email: email })
-        if (Object.keys(user).length>0) {
+        if (user) {
             res.send({mess: "error",status:400,text:"Already Register "})
         } else {
             const saltRounds = 10
