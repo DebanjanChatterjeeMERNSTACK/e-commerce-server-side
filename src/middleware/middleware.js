@@ -5,9 +5,9 @@ dotenv.config()
 
 const middleware = (req, res, next) => {
   const token = req.headers["auth"]
-
+  const login_id = req.headers["login_id"];
 try{
-  if (token) {
+  if (token && login_id) {
     jwt.verify(token, process.env.JwTKEY, (err, valid) => {
       if (valid) {
         next()

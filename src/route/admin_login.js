@@ -17,11 +17,17 @@ route.post("/admin_login",async(req,res)=>{
         if(data){
             const match = await bcrypt.compare(password, data.password);
             if(match===true){     
-                jwt.sign({data},process.env.JWTKEY,{expiresIn:"24h"},(err,tokan)=>{
+                jwt.sign({data},process.env.JWTKEY,{expiresIn:"24h"},(err,token)=>{
                     if(err){
                         res.send({ mess: "error",status: 400, text: err.message });
                     }else{
-                        res.send({ mess: "success",status: 200, text: "Login Complete", id:data._id ,token:tokan });
+                        res.send({ mess: "success",status: 200, text: "Login Complete", id:data._id ,token:token });
+                        res.cookie("token", token, {
+                            httpOnly: true, // Prevents access via JavaScript
+                            secure: true, // Use only in HTTPS
+                            sameSite: "Strict", // CSRF protection
+                            maxAge: 60 * 60 * 1000 // 1 hour expiry
+                        });
                     }
                 })
             }else{
