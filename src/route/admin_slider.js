@@ -9,7 +9,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const storage = multer.diskStorage({
-  destination: "src/slider",
+  destination: "src/slider_image",
   filename: (req, file, cb) => {
     return cb(
       null,

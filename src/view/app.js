@@ -9,9 +9,10 @@ const Product = require("../route/admin_product")
 const Forget = require("../route/admin_forget")
 const ProductSearch = require("../route/admin_product_search")
 //const Productpagenation = require("../route/admin_product_pagination")
-//const Contact = require("../route/admin_contact")
+const Contact = require("../route/admin_contact")
 const Catagory = require("../route/admin_catagory")
-//const Review = require("../route/admin_review")
+const Social = require("../route/admin_social_media")
+const Logo=require("../route/admin_logo")
 //const Catagorypagenation = require("../route/admin_catagory_pagination")
 const CatagorySearch =require("../route/admin_catagory_search")
 
@@ -47,11 +48,13 @@ app.use(express.json())
 
 
 
-app.use("/upload", express.static("src/upload"))
+app.use("/upload", express.static("src/product_image"))
 
-app.use("/slider", express.static("src/slider"))
+app.use("/slider", express.static("src/slider_image"))
 
-app.use("/catagory", express.static("src/catagory"))
+app.use("/catagory", express.static("src/catagory_image"))
+
+app.use("/logo", express.static("src/logo_image"))
 
 
 
@@ -69,11 +72,13 @@ app.use(ProductSearch)
 
 //app.use(Productpagenation)
 
-//app.use(Contact)
+app.use(Contact)
 
-//app.use(Review)
+app.use(Social)
 
 app.use(Catagory)
+
+app.use(Logo)
 
 //app.use(Catagorypagenation)
 

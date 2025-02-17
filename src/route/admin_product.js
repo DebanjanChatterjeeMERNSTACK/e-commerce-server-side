@@ -10,7 +10,7 @@ const { v4: uuidv4 } = require("uuid");
 dotenv.config();
 
 const storage = multer.diskStorage({
-  destination: "src/upload",
+  destination: "src/product_image",
   filename: (req, file, cb) => {
     return cb(
       null,
