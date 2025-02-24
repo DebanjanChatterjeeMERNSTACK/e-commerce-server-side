@@ -27,8 +27,9 @@ route.post(
   upload.single("product_Catagory_Image"),
   catagory_middileware,
   async (req, res) => {
-    const { login_id, product_Catagory_Name } = req.body;
 
+    const { login_id, product_Catagory_Name,product_Meta_Title,product_Meta_Description,product_Meta_Keywords } = req.body;
+      const product_SubCategory_Name =JSON.parse(req.body.product_SubCategory_Name)
     try {
       if (login_id) {
         if (req.file) {
@@ -38,6 +39,10 @@ route.post(
             login_id: login_id,
             product_Catagory_Name: product_Catagory_Name,
             product_Catagory_Image: product_Catagory_Image,
+            product_SubCategory_Name:product_SubCategory_Name,
+            product_Meta_Title:product_Meta_Title,
+            product_Meta_Description:product_Meta_Description,
+            product_Meta_Keywords:product_Meta_Keywords
           });
           catagory.save().then(() => {
             res.send({
@@ -89,7 +94,8 @@ route.post(
   "/catagory_update",
   upload.single("product_Catagory_Image"),
   async (req, res) => {
-    const { id, product_Catagory_Name } = req.body;
+    const { id, product_Catagory_Name,product_Meta_Title,product_Meta_Description,product_Meta_Keywords } = req.body;
+      const product_SubCategory_Name =JSON.parse(req.body.product_SubCategory_Name)
 
     try {
       if (req.file) {
@@ -100,6 +106,10 @@ route.post(
           {
             product_Catagory_Name: product_Catagory_Name,
             product_Catagory_Image: product_Catagory_Images,
+            product_SubCategory_Name:product_SubCategory_Name,
+            product_Meta_Title:product_Meta_Title,
+            product_Meta_Description:product_Meta_Description,
+            product_Meta_Keywords:product_Meta_Keywords
           }
         );
       
@@ -107,7 +117,7 @@ route.post(
           
           const delete_Image =
             updatedCategory.product_Catagory_Image.split("/");
-          fs.unlink(`src/catagory/${delete_Image[4]}`, (err) => {
+          fs.unlink(`src/catagory_image/${delete_Image[4]}`, (err) => {
             if (err) {
               throw err;
             } else {
@@ -131,6 +141,10 @@ route.post(
           { _id: id },
           {
             product_Catagory_Name: product_Catagory_Name,
+            product_SubCategory_Name:product_SubCategory_Name,
+            product_Meta_Title:product_Meta_Title,
+            product_Meta_Description:product_Meta_Description,
+            product_Meta_Keywords:product_Meta_Keywords
 
           }
         );
@@ -188,13 +202,56 @@ route.get("/catagory_get", async (req, res) => {
   }
 });
 
+route.post("/catagory_update_delete",async(req,res)=>{
+
+  const {id,product_Catagory_delete_update}=req.body
+  
+  try {
+    const catagory_Delete = await Catagory.findOneAndUpdate({ _id: id }, { product_Catagory_Delete: product_Catagory_delete_update });
+    if (catagory_Delete) {
+          res.send({
+            mess: "success",
+            status: 200,
+            text: "Delete Successfull",
+          });
+    } else {
+      res.send({ mess: "error", status: 400, text: "Please Send Correct Id" });
+    }
+  } catch (err) {
+    res.send({ mess: "error", status: 400, text: err.message });
+  }
+
+})
+
+route.post("/catagory_restore",async(req,res)=>{
+
+  const {id,product_Catagory_delete_update}=req.body
+  
+  try {
+    const catagory_Delete = await Catagory.findOneAndUpdate({ _id: id }, { product_Catagory_Delete: product_Catagory_delete_update });
+    if (catagory_Delete) {
+          res.send({
+            mess: "success",
+            status: 200,
+            text: "Restore Successfull",
+          });
+    } else {
+      res.send({ mess: "error", status: 400, text: "Please Send Correct Id" });
+    }
+  } catch (err) {
+    res.send({ mess: "error", status: 400, text: err.message });
+  }
+
+})
+
 route.post("/catagory_delete", async (req, res) => {
   const id = req.body.id;
+  
   try {
     const catagory = await Catagory.findOneAndDelete({ _id: id }, { _id: id });
     if (catagory) {
       const delete_Image = catagory.product_Catagory_Image.split("/");
-      fs.unlink(`src/catagory/${delete_Image[4]}`, (err) => {
+      fs.unlink(`src/catagory_image/${delete_Image[4]}`, (err) => {
         if (err) {
           throw err;
         } else {

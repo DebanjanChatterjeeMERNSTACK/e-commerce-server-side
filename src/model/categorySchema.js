@@ -10,7 +10,24 @@ const catagorySchema=new mongoose.Schema({
    },
    product_Catagory_Name:{
     type:String
+   },
+   product_SubCategory_Name:{
+    type:Array
+   },
+   product_Meta_Title:{
+    type:String
+   },
+   product_Meta_Description:{
+    type:String
+   },
+   product_Meta_Keywords:{
+    type:String
+   },
+   product_Catagory_Delete:{
+    type:Number,
+    default:0
    }
+   
 },{
     timestamps:true
 }) 
