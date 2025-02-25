@@ -236,7 +236,7 @@ route.post(
             return part[4];
           });
           delete_Image.forEach((element) => {
-            fs.unlink(`src/upload/${element}`, (err) => {
+            fs.unlink(`src/product_image/${element}`, (err) => {
               if (err) {
                 throw err;
               } else {
@@ -317,7 +317,7 @@ route.post("/product_delete", async (req, res) => {
         return part[4];
       });
       delete_Image.forEach((element) => {
-        fs.unlink(`src/upload/${element}`, (err) => {
+        fs.unlink(`src/product_image/${element}`, (err) => {
           if (err) {
             throw err;
           } else {

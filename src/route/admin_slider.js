@@ -125,7 +125,7 @@ route.post(
         );
         if (slider) {
           const delete_Image = slider.slider_Image.split("/");
-          fs.unlink(`src/slider/${delete_Image[4]}`, (err) => {
+          fs.unlink(`src/slider_image/${delete_Image[4]}`, (err) => {
             if (err) {
               throw err;
             } else {
@@ -165,7 +165,7 @@ route.post("/slider_delete", async (req, res) => {
     const slider = await Slider.findOneAndDelete({ _id: id }, { _id: id });
     if (slider) {
       const delete_Image = slider.slider_Image.split("/");
-      fs.unlink(`src/slider/${delete_Image[4]}`, (err) => {
+      fs.unlink(`src/slider_image/${delete_Image[4]}`, (err) => {
         if (err) {
           throw err;
         } else {
