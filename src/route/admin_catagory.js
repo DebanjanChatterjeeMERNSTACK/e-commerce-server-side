@@ -258,7 +258,7 @@ route.post("/catagory_delete", async (req, res) => {
           res.send({
             mess: "success",
             status: 200,
-            text: "Delete Successfull",
+            text: "Permanent Delete Successfull",
           });
         }
       });

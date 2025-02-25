@@ -16,7 +16,7 @@ const Catagory_middleware = async (req, res, next) => {
           res.send({
             mess: "error",
             status: 400,
-            text: "Catagory Already Save",
+            text: "Catagory Have Same Name, Delete Permanently",
           });
         } else {
           next();

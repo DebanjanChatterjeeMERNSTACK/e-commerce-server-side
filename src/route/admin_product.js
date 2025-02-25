@@ -31,6 +31,8 @@ route.post(
       product_Title,
       product_Description,
       product_Category,
+      product_Sub_Category,
+      product_Weight_units,
       product_Selling_Price,
       product_Main_Price,
       product_Stock,
@@ -39,12 +41,16 @@ route.post(
       product_hit,
       product_Offer_Percentage,
       product_Brand,
+      product_SKU,
+      product_rating,
       product_Warranty_Information,
       product_Shipping_Information,
-      product_Availability_Status,
       product_Weight,
+      product_SEO_Title,
+      product_SEO_Description,
+      product_SEO_Keywords
     } = req.body;
-
+    const product_color= JSON.parse(req.body.product_color)
     const product_variant = JSON.parse(req.body.product_variant);
     const product_Images = req.files;
 
@@ -59,7 +65,12 @@ route.post(
             product_Title: product_Title,
             product_Description: product_Description,
             product_Category: product_Category,
+            product_Weight_units:product_Weight_units,
+            product_Sub_Category:product_Sub_Category,
             product_Selling_Price: product_Selling_Price,
+            product_SKU:product_SKU,
+            product_color:product_color,
+            product_rating:product_rating,
             product_Main_Price: product_Main_Price,
             product_Stock: product_Stock,
             product_Image: product_Image,
@@ -71,8 +82,10 @@ route.post(
             product_Brand: product_Brand,
             product_Warranty_Information: product_Warranty_Information,
             product_Shipping_Information: product_Shipping_Information,
-            product_Availability_Status: product_Availability_Status,
             product_Weight: product_Weight,
+            product_SEO_Title:product_SEO_Title,
+            product_SEO_Description:product_SEO_Description,
+            product_SEO_Keywords:product_SEO_Keywords
           });
           Products.save().then(() => {
             res.send({
@@ -160,6 +173,10 @@ route.post(
       product_Title,
       product_Description,
       product_Category,
+      product_Sub_Category,
+      product_SKU,
+      product_Weight_units,
+      product_rating,
       product_Selling_Price,
       product_Main_Price,
       product_Stock,
@@ -170,10 +187,12 @@ route.post(
       product_Brand,
       product_Warranty_Information,
       product_Shipping_Information,
-      product_Availability_Status,
       product_Weight,
+      product_SEO_Title,
+      product_SEO_Description,
+      product_SEO_Keywords
     } = req.body;
-
+    const product_color= JSON.parse(req.body.product_color)
     const product_variant = JSON.parse(req.body.product_variant);
     const product_Images = req.files;
     try {
@@ -188,6 +207,11 @@ route.post(
             product_Title: product_Title,
             product_Description: product_Description,
             product_Category: product_Category,
+            product_Sub_Category:product_Sub_Category,
+            product_SKU:product_SKU,
+            product_Weight_units:product_Weight_units,
+            product_color:product_color,
+            product_rating:product_rating,
             product_Selling_Price: product_Selling_Price,
             product_Main_Price: product_Main_Price,
             product_Stock: product_Stock,
@@ -200,8 +224,10 @@ route.post(
             product_Brand: product_Brand,
             product_Warranty_Information: product_Warranty_Information,
             product_Shipping_Information: product_Shipping_Information,
-            product_Availability_Status: product_Availability_Status,
             product_Weight: product_Weight,
+            product_SEO_Title:product_SEO_Title,
+            product_SEO_Description:product_SEO_Description,
+            product_SEO_Keywords:product_SEO_Keywords
           }
         );
         if (product) {
@@ -236,6 +262,11 @@ route.post(
             product_Title: product_Title,
             product_Description: product_Description,
             product_Category: product_Category,
+            product_Sub_Category:product_Sub_Category,
+            product_SKU:product_SKU,
+            product_Weight_units:product_Weight_units,
+            product_color:product_color,
+            product_rating:product_rating,
             product_Selling_Price: product_Selling_Price,
             product_Main_Price: product_Main_Price,
             product_Stock: product_Stock,
@@ -247,8 +278,10 @@ route.post(
             product_Brand: product_Brand,
             product_Warranty_Information: product_Warranty_Information,
             product_Shipping_Information: product_Shipping_Information,
-            product_Availability_Status: product_Availability_Status,
             product_Weight: product_Weight,
+            product_SEO_Title,product_SEO_Title,
+            product_SEO_Description:product_SEO_Description,
+            product_SEO_Keywords:product_SEO_Keywords
           }
         );
         if (product) {
