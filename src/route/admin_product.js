@@ -37,7 +37,7 @@ route.post(
       product_Main_Price,
       product_Stock,
       product_Quantity,
-      product_unit,
+      product_Quantity_unit,
       product_hit,
       product_Offer_Percentage,
       product_Brand,
@@ -75,7 +75,7 @@ route.post(
             product_Stock: product_Stock,
             product_Image: product_Image,
             product_Quantity: product_Quantity,
-            product_unit: product_unit,
+            product_Quantity_unit: product_Quantity_unit,
             product_variant: product_variant,
             product_hit: product_hit,
             product_Offer_Percentage: product_Offer_Percentage,
@@ -181,7 +181,7 @@ route.post(
       product_Main_Price,
       product_Stock,
       product_Quantity,
-      product_unit,
+      product_Quantity_unit,
       product_hit,
       product_Offer_Percentage,
       product_Brand,
@@ -217,7 +217,7 @@ route.post(
             product_Stock: product_Stock,
             product_Image: product_Image,
             product_Quantity: product_Quantity,
-            product_unit: product_unit,
+            product_Quantity_unit: product_Quantity_unit,
             product_variant: product_variant,
             product_hit: product_hit,
             product_Offer_Percentage: product_Offer_Percentage,
@@ -271,7 +271,7 @@ route.post(
             product_Main_Price: product_Main_Price,
             product_Stock: product_Stock,
             product_Quantity: product_Quantity,
-            product_unit: product_unit,
+            product_Quantity_unit: product_Quantity_unit,
             product_variant: product_variant,
             product_hit: product_hit,
             product_Offer_Percentage: product_Offer_Percentage,
@@ -279,7 +279,7 @@ route.post(
             product_Warranty_Information: product_Warranty_Information,
             product_Shipping_Information: product_Shipping_Information,
             product_Weight: product_Weight,
-            product_SEO_Title,product_SEO_Title,
+            product_SEO_Title:product_SEO_Title,
             product_SEO_Description:product_SEO_Description,
             product_SEO_Keywords:product_SEO_Keywords
           }
@@ -305,6 +305,52 @@ route.post(
     }
   }
 );
+
+route.post("/product_delete_tempo",async(req,res)=>{
+
+  const {id,product_Delete}=req.body
+  
+  try {
+    const product_Delete_tempo = await Product.findOneAndUpdate({ _id: id }, { product_Delete: product_Delete });
+    if (product_Delete_tempo) {
+          res.send({
+            mess: "success",
+            status: 200,
+            text: "Delete Successfull",
+          });
+    } else {
+      res.send({ mess: "error", status: 400, text: "Please Send Correct Id" });
+    }
+  } catch (err) {
+    res.send({ mess: "error", status: 400, text: err.message });
+  }
+
+})
+
+
+
+route.post("/product_restore",async(req,res)=>{
+
+  const {id,product_Delete}=req.body
+  
+  try {
+    const product_Delete_tempo = await Product.findOneAndUpdate({ _id: id }, { product_Delete: product_Delete });
+    if (product_Delete_tempo) {
+          res.send({
+            mess: "success",
+            status: 200,
+            text: "Restore Successfull",
+          });
+    } else {
+      res.send({ mess: "error", status: 400, text: "Please Send Correct Id" });
+    }
+  } catch (err) {
+    res.send({ mess: "error", status: 400, text: err.message });
+  }
+
+})
+
+
 
 route.post("/product_delete", async (req, res) => {
   const id = req.body.id;

@@ -34,7 +34,7 @@ const Productshema = new mongoose.Schema({
     product_Quantity:{
         type:String
     },
-    product_unit:{
+    product_Quantity_unit:{
         type:String,
         enum: ['Milli Liter', 'Liter' ,'Kg' , 'Gm' ,'Pieces', 'Paired'],
     },
@@ -85,9 +85,11 @@ const Productshema = new mongoose.Schema({
     },
     product_SEO_Keywords:{
         type:String
+    },
+    product_Delete:{
+        type:Number,
+        default:0
     }
-
-
 }, {
     timestamps: true
 })
