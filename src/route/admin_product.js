@@ -235,23 +235,25 @@ route.post(
         if (product) {
           const delete_Image = product.product_Image.map((e) => {
             const part = e.split("/");
-            return part[4];
+            return part[4]; // Extract filename
           });
-          delete_Image.forEach((element) => {
-            fs.unlink(`src/product_image/${element}`, (err) => {
-              if (err) {
-                throw err;
-              } else {
-                res.send({
-                  mess: "success",
-                  status: 200,
-                  text: "Update Successfull",
-                });
-              }
-            });
+
+          // Wait for all deletions before sending a response
+          await Promise.all(
+            delete_Image.map((element) =>
+              fs.unlink(`src/product_image/${element}`, (err) => {
+                if (err) console.error(`Failed to delete: ${element}`, err);
+              })
+            )
+          );
+
+          return res.send({
+            mess: "success",
+            status: 200,
+            text: "Update Successful",
           });
         } else {
-          res.send({
+          return res.send({
             mess: "error",
             status: 400,
             text: "Please Send Correct Id",
