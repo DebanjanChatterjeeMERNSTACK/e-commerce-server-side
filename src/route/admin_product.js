@@ -48,9 +48,9 @@ route.post(
       product_Weight,
       product_SEO_Title,
       product_SEO_Description,
-      product_SEO_Keywords
+      product_SEO_Keywords,
     } = req.body;
-    const product_color= JSON.parse(req.body.product_color)
+    const product_color = JSON.parse(req.body.product_color);
     const product_variant = JSON.parse(req.body.product_variant);
     const product_Images = req.files;
 
@@ -65,12 +65,12 @@ route.post(
             product_Title: product_Title,
             product_Description: product_Description,
             product_Category: product_Category,
-            product_Weight_units:product_Weight_units,
-            product_Sub_Category:product_Sub_Category,
+            product_Weight_units: product_Weight_units,
+            product_Sub_Category: product_Sub_Category,
             product_Selling_Price: product_Selling_Price,
-            product_SKU:product_SKU,
-            product_color:product_color,
-            product_rating:product_rating,
+            product_SKU: product_SKU,
+            product_color: product_color,
+            product_rating: product_rating,
             product_Main_Price: product_Main_Price,
             product_Stock: product_Stock,
             product_Image: product_Image,
@@ -83,9 +83,9 @@ route.post(
             product_Warranty_Information: product_Warranty_Information,
             product_Shipping_Information: product_Shipping_Information,
             product_Weight: product_Weight,
-            product_SEO_Title:product_SEO_Title,
-            product_SEO_Description:product_SEO_Description,
-            product_SEO_Keywords:product_SEO_Keywords
+            product_SEO_Title: product_SEO_Title,
+            product_SEO_Description: product_SEO_Description,
+            product_SEO_Keywords: product_SEO_Keywords,
           });
           Products.save().then(() => {
             res.send({
@@ -116,10 +116,12 @@ route.get("/product_get", async (req, res) => {
   // const login_id = req.body.login_id;
   try {
     if (login_id != "undefined" || login_id !== "" || !login_id) {
-      const product = await Product.find({ login_id: login_id }).sort({
-        _id: -1,
-      }).select('-login_id');
-      if (product.length>0) {
+      const product = await Product.find({ login_id: login_id })
+        .sort({
+          _id: -1,
+        })
+        .select("-login_id");
+      if (product.length > 0) {
         res.send({
           mess: "success",
           status: 200,
@@ -144,7 +146,7 @@ route.get("/product_get", async (req, res) => {
 route.get("/product_edit/:id", async (req, res) => {
   const id = req.params["id"];
   try {
-    const product = await Product.findOne({ _id: id }).select('-login_id');
+    const product = await Product.findOne({ _id: id }).select("-login_id");
     if (product) {
       res.send({
         mess: "success",
@@ -190,9 +192,9 @@ route.post(
       product_Weight,
       product_SEO_Title,
       product_SEO_Description,
-      product_SEO_Keywords
+      product_SEO_Keywords,
     } = req.body;
-    const product_color= JSON.parse(req.body.product_color)
+    const product_color = JSON.parse(req.body.product_color);
     const product_variant = JSON.parse(req.body.product_variant);
     const product_Images = req.files;
     try {
@@ -207,11 +209,11 @@ route.post(
             product_Title: product_Title,
             product_Description: product_Description,
             product_Category: product_Category,
-            product_Sub_Category:product_Sub_Category,
-            product_SKU:product_SKU,
-            product_Weight_units:product_Weight_units,
-            product_color:product_color,
-            product_rating:product_rating,
+            product_Sub_Category: product_Sub_Category,
+            product_SKU: product_SKU,
+            product_Weight_units: product_Weight_units,
+            product_color: product_color,
+            product_rating: product_rating,
             product_Selling_Price: product_Selling_Price,
             product_Main_Price: product_Main_Price,
             product_Stock: product_Stock,
@@ -225,9 +227,9 @@ route.post(
             product_Warranty_Information: product_Warranty_Information,
             product_Shipping_Information: product_Shipping_Information,
             product_Weight: product_Weight,
-            product_SEO_Title:product_SEO_Title,
-            product_SEO_Description:product_SEO_Description,
-            product_SEO_Keywords:product_SEO_Keywords
+            product_SEO_Title: product_SEO_Title,
+            product_SEO_Description: product_SEO_Description,
+            product_SEO_Keywords: product_SEO_Keywords,
           }
         );
         if (product) {
@@ -262,11 +264,11 @@ route.post(
             product_Title: product_Title,
             product_Description: product_Description,
             product_Category: product_Category,
-            product_Sub_Category:product_Sub_Category,
-            product_SKU:product_SKU,
-            product_Weight_units:product_Weight_units,
-            product_color:product_color,
-            product_rating:product_rating,
+            product_Sub_Category: product_Sub_Category,
+            product_SKU: product_SKU,
+            product_Weight_units: product_Weight_units,
+            product_color: product_color,
+            product_rating: product_rating,
             product_Selling_Price: product_Selling_Price,
             product_Main_Price: product_Main_Price,
             product_Stock: product_Stock,
@@ -279,19 +281,17 @@ route.post(
             product_Warranty_Information: product_Warranty_Information,
             product_Shipping_Information: product_Shipping_Information,
             product_Weight: product_Weight,
-            product_SEO_Title:product_SEO_Title,
-            product_SEO_Description:product_SEO_Description,
-            product_SEO_Keywords:product_SEO_Keywords
+            product_SEO_Title: product_SEO_Title,
+            product_SEO_Description: product_SEO_Description,
+            product_SEO_Keywords: product_SEO_Keywords,
           }
         );
         if (product) {
-        
-                res.send({
-                  mess: "success",
-                  status: 200,
-                  text: "Update Successfull",
-                });   
-           
+          res.send({
+            mess: "success",
+            status: 200,
+            text: "Update Successfull",
+          });
         } else {
           res.send({
             mess: "error",
@@ -306,74 +306,74 @@ route.post(
   }
 );
 
-route.post("/product_delete_tempo",async(req,res)=>{
+route.post("/product_delete_tempo", async (req, res) => {
+  const { id, product_Delete } = req.body;
 
-  const {id,product_Delete}=req.body
-  
   try {
-    const product_Delete_tempo = await Product.findOneAndUpdate({ _id: id }, { product_Delete: product_Delete });
+    const product_Delete_tempo = await Product.findOneAndUpdate(
+      { _id: id },
+      { product_Delete: product_Delete }
+    );
     if (product_Delete_tempo) {
-          res.send({
-            mess: "success",
-            status: 200,
-            text: "Delete Successfull",
-          });
+      res.send({
+        mess: "success",
+        status: 200,
+        text: "Delete Successfull",
+      });
     } else {
       res.send({ mess: "error", status: 400, text: "Please Send Correct Id" });
     }
   } catch (err) {
     res.send({ mess: "error", status: 400, text: err.message });
   }
+});
 
-})
+route.post("/product_restore", async (req, res) => {
+  const { id, product_Delete } = req.body;
 
-
-
-route.post("/product_restore",async(req,res)=>{
-
-  const {id,product_Delete}=req.body
-  
   try {
-    const product_Delete_tempo = await Product.findOneAndUpdate({ _id: id }, { product_Delete: product_Delete });
+    const product_Delete_tempo = await Product.findOneAndUpdate(
+      { _id: id },
+      { product_Delete: product_Delete }
+    );
     if (product_Delete_tempo) {
-          res.send({
-            mess: "success",
-            status: 200,
-            text: "Restore Successfull",
-          });
+      res.send({
+        mess: "success",
+        status: 200,
+        text: "Restore Successfull",
+      });
     } else {
       res.send({ mess: "error", status: 400, text: "Please Send Correct Id" });
     }
   } catch (err) {
     res.send({ mess: "error", status: 400, text: err.message });
   }
-
-})
-
-
+});
 
 route.post("/product_delete", async (req, res) => {
   const id = req.body.id;
   try {
-    const product = await Product.findOneAndDelete({ _id: id }, { _id: id });
-  
+    const product = await Product.findOneAndDelete({ _id: id });
+
     if (product) {
       const delete_Image = product.product_Image.map((e) => {
         const part = e.split("/");
         return part[4];
       });
-      delete_Image.forEach((element) => {
-        fs.unlink(`src/product_image/${element}`, (err) => {
-          if (err) {
-            throw err;
-          } else {
-            res.send({
-              mess: "success",
-              status: 200,
-              text: "Delete Successfull",
-            });
-          }
-        });
+
+      // Wait for all deletions before sending a response
+      await Promise.all(
+        delete_Image.map((element) =>
+          fs.promises.unlink(`src/product_image/${element}`).catch((err) => {
+            console.error(`Failed to delete: ${element}`, err);
+          })
+        )
+      );
+
+      res.send({
+        mess: "success",
+        status: 200,
+        text: "Permanent Delete Successful",
       });
     } else {
       res.send({ mess: "error", status: 400, text: "Please Send Correct Id" });

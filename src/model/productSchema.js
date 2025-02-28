@@ -19,10 +19,10 @@ const Productshema = new mongoose.Schema({
         type: String
     },
     product_Selling_Price: {
-        type: String
+        type: Number
     },
     product_Main_Price: {
-        type: String
+        type: Number
     },
     product_Stock: {
         type: String,
@@ -32,7 +32,7 @@ const Productshema = new mongoose.Schema({
         type: Array
     },
     product_Quantity:{
-        type:String
+        type:Number
     },
     product_Quantity_unit:{
         type:String,
@@ -49,7 +49,7 @@ const Productshema = new mongoose.Schema({
         type:Array
     },
     product_Offer_Percentage:{
-        type:String
+        type:Number
     },
     product_Brand:{
         type:String
@@ -63,15 +63,15 @@ const Productshema = new mongoose.Schema({
     },
     product_Shipping_Information:{
         type:String,
-        enum: ['2 day', '3 days', '5 days' ,'7 days'],
+        enum: ['2 days', '3 days', '5 days' ,'7 days'],
 
     },
     product_rating:{
-      type:String,
-      enum: ['3', '4', '5 ']
+      type:Number,
+      enum: [3, 4, 5]
     },
     product_Weight:{
-        type:String
+        type:Number
     },
     product_Weight_units:{
         type:String,

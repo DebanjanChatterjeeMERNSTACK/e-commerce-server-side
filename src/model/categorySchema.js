@@ -23,6 +23,18 @@ const catagorySchema=new mongoose.Schema({
    product_Meta_Keywords:{
     type:String
    },
+   product_Category_slug:{
+    type:String
+   },
+   product_Category_order:{
+    type:String
+   },
+   product_Category_image_menu:{
+    type:String
+   },
+   product_Category_main_menu:{
+    type:String
+   },
    product_Catagory_Delete:{
     type:Number,
     default:0
