@@ -27,6 +27,7 @@ const Productshema = new mongoose.Schema({
     product_Stock: {
         type: String,
         enum: ['In Stock', 'Out Stock'],
+        default:'In Stock',
     },
     product_Image: {
         type: Array
@@ -63,8 +64,7 @@ const Productshema = new mongoose.Schema({
     },
     product_Shipping_Information:{
         type:String,
-        enum: ['2 days', '3 days', '5 days' ,'7 days'],
-
+        enum: ['2 days', '3 days', '5 days' ,'7 days' ,'10 days','12 days','15 days'],
     },
     product_rating:{
       type:Number,

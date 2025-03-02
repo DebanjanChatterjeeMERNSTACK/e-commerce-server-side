@@ -352,6 +352,33 @@ route.post("/product_restore", async (req, res) => {
   }
 });
 
+route.post("/product_update_stock", async (req, res) => {
+  const { id, product_Stock } = req.body;
+try{
+  const product = await Product.findOneAndUpdate(
+    { _id: id },
+    {
+      product_Stock: product_Stock,
+    }
+  );
+  if (product) {
+    res.send({
+      mess: "success",
+      status: 200,
+      text: "Update Successfull",
+    });
+  } else {
+    res.send({
+      mess: "error",
+      status: 400,
+      text: "Please Send Correct Id",
+    });
+  }
+}catch(err){
+  res.send({ mess: "error", status: 400, text: err.message });
+}
+});
+
 route.post("/product_delete", async (req, res) => {
   const id = req.body.id;
   try {
