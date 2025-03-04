@@ -30,3 +30,5 @@ route.get("/user_product_get", async (req, res) => {
       res.send({ mess: "error", status: 400, text: err.message });
     }
   });
+
+  module.exports=route

@@ -16,7 +16,8 @@ const Logo=require("../route/admin_logo")
 //const Catagorypagenation = require("../route/admin_catagory_pagination")
 const CatagorySearch =require("../route/admin_catagory_search")
 
-
+const User_product=require("../route/User/user_product")
+const User_category=require("../route/User/user_category")
 // const socketIO = require('socket.io');
 // const http = require("http")
 // const Products = require("../model/productSchema")
@@ -85,7 +86,8 @@ app.use(Logo)
 app.use(CatagorySearch)
 
 
-
+app.use(User_category)
+app.use(User_product)
 
 
 // io.on('connection', (socket) => {

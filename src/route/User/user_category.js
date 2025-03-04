@@ -28,3 +28,5 @@ route.get("/user_catagory_get", async (req, res) => {
     res.send({ mess: "error", status: 400, text: err.message });
   }
 });
+
+module.exports=route
