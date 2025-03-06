@@ -3,7 +3,7 @@ const route = express.Router();
 const Cart = require("../../model/user_cartSchema");
 const user_middileware = require("../../middleware/user_middleware");
 
-route.post("/user_cart", user_middileware, (req, res) => {
+route.post("/user_add_cart", user_middileware, (req, res) => {
   const { user_login_id, product_id, quentity, price } = req.body;
 
   try {

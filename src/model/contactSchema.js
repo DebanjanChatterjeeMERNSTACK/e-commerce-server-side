@@ -5,13 +5,25 @@ const contactSchema = new mongoose.Schema({
     login_id: {
         type: String
     },
-    Address: {
+    Address1: {
         type: String
     },
-    Phone_number: {
+    Address2: {
         type: String
     },
-    Email_id: {
+    Phone_number1: {
+        type: String
+    },
+    Phone_number2: {
+        type: String
+    },
+    Email_id1: {
+        type: String
+    },
+    Email_id2: {
+        type: String
+    },
+    Map: {
         type: String
     }
 
