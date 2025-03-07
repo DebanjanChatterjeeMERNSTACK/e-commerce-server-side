@@ -95,7 +95,7 @@ route.post("/social_update", async (req, res) => {
   const { id, facebook, instragram, twitter ,youtube } = req.body;
   try {
     const social = await Social.findOneAndUpdate(
-      { id: id },
+      { _id: id },
       { facebook: facebook, instragram: instragram, twitter: twitter,youtube:youtube }
     );
     if (social) {
