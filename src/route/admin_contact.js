@@ -133,9 +133,4 @@ route.post("/contact_update", async (req, res) => {
 
 // })
 
-
-
-
-
-
 module.exports = route;
