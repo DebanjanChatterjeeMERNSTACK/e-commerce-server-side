@@ -15,7 +15,7 @@ const Social = require("../route/admin_social_media")
 const Logo=require("../route/admin_logo")
 //const Catagorypagenation = require("../route/admin_catagory_pagination")
 const CatagorySearch =require("../route/admin_catagory_search")
-
+const Policy =require("../route/admin_policy")
 const User_product=require("../route/User/user_product")
 const User_category=require("../route/User/user_category")
 // const socketIO = require('socket.io');
@@ -82,6 +82,7 @@ app.use(Catagory)
 app.use(Logo)
 
 //app.use(Catagorypagenation)
+app.use(Policy)
 
 app.use(CatagorySearch)
 
