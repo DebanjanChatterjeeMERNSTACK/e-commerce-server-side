@@ -289,6 +289,98 @@ route.post("/terms_update",async (req, res) => {
   }
 });
 
+
+
+
+
+
+
+ /// middleware
+ route.get("/refund_get",async (req, res) => {
+  const login_id = req.headers["login_id"];
+  try {
+    if (login_id != "undefined" || login_id !== "" || !login_id) {
+      const Policies = await Policy.findOne({ login_id: login_id ,policy_name: "Refund Policy",})
+        .sort({
+          _id: -1,
+        })
+        .select("-login_id");
+      res.send({
+        mess: "success",
+        status: 200,
+        text: "Send Success",
+        policy: Policies,
+      });
+    } else {
+      res.send({ mess: "error", status: 400, text: "Please Login" });
+    }
+  } catch (err) {
+    res.send({ mess: "error", status: 400, text: err.message });
+  }
+});
+
+route.post("/refund_update",async (req, res) => {
+  const { refund_contant } = req.body;
+  // console.log(req.body)
+  // return
+  try {
+
+      const Policies = await Policy.findOneAndUpdate({policy_name: "Refund Policy"},{policy_contant:refund_contant})
+      if (Policies) {
+          res.send({
+            mess: "success",
+            status: 200,
+            text: "Refund Policy Update Successfull",
+          });
+        } else {
+          res.send({
+            mess: "error",
+            status: 400,
+            text: "Please Send Correct Id",
+          });
+        }
+  } catch (err) {
+    res.send({ mess: "error", status: 400, text: err.message });
+  }
+});
+
+route.post("/add_refund", async (req, res) => {
+  const { login_id, refund_contant } = req.body;
+  // console.log(req.body)
+  // return
+  try {
+    if (login_id) {
+      const data = await Policy.find({ login_id: login_id }).countDocuments();
+      if (data === 4) {
+        res.send({
+          mess: "error",
+          status: 400,
+          text: "You Have Already Submit Your Policy ",
+        });
+      } else {
+        const Terms = await Policy({
+          login_id:login_id,
+          policy_name: "Refund Policy",
+          policy_contant: refund_contant,
+        });
+        Terms.save().then(() => {
+          res.send({
+            mess: "success",
+            status: 200,
+            text: "Refund Policy Save Successfull",
+          });
+        });
+      }
+    } else {
+      res.send({ mess: "error", status: 400, text: "Please Login" });
+    }
+  } catch (error) {
+    res.send({ mess: "error", status: 400, text: err.message });
+  }
+});
+
+
+
   module.exports=route
 
   
