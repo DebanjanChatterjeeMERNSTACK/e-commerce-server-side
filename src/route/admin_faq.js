@@ -26,8 +26,6 @@ route.post("/add_faq", async (req, res) => {
   }
 });
 
-
-
 route.post("/faq_update", async (req, res) => {
   const { id, Question, Answer } = req.body;
   try {
@@ -53,7 +51,6 @@ route.post("/faq_update", async (req, res) => {
   }
 });
 
-
 //middleware
 route.get("/faq_get", async (req, res) => {
   const login_id = req.headers["login_id"];
@@ -72,6 +69,25 @@ route.get("/faq_get", async (req, res) => {
       });
     } else {
       res.send({ mess: "error", status: 400, text: "Please Login" });
+    }
+  } catch (err) {
+    res.send({ mess: "error", status: 400, text: err.message });
+  }
+});
+
+route.post("/faq_delete", async (req, res) => {
+  const id = req.body.id;
+
+  try {
+    const Faqdata = await Faq.findOneAndDelete({ _id: id }, { _id: id });
+    if (Faqdata) {
+      res.send({
+        mess: "success",
+        status: 200,
+        text: "Permanent Delete Successfull",
+      });
+    } else {
+      res.send({ mess: "error", status: 400, text: "Please Send Correct Id" });
     }
   } catch (err) {
     res.send({ mess: "error", status: 400, text: err.message });

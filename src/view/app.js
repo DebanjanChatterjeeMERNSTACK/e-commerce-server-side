@@ -18,6 +18,7 @@ const CatagorySearch =require("../route/admin_catagory_search")
 const Policy =require("../route/admin_policy")
 const User_product=require("../route/User/user_product")
 const User_category=require("../route/User/user_category")
+const Faq =require("../route/admin_faq")
 // const socketIO = require('socket.io');
 // const http = require("http")
 // const Products = require("../model/productSchema")
@@ -86,6 +87,7 @@ app.use(Policy)
 
 app.use(CatagorySearch)
 
+app.use(Faq)
 
 app.use(User_category)
 app.use(User_product)
