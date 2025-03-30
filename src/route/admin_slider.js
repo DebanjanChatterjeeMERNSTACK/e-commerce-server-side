@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 route.post("/add_slider", upload.single("slider_Image"), async (req, res) => {
-  const { login_id, slider_Title, slider_Description, product_Catagory } =
+  const { login_id, slider_Title, slider_Description } =
     req.body;
 
   try {
@@ -33,7 +33,6 @@ route.post("/add_slider", upload.single("slider_Image"), async (req, res) => {
           slider_Title: slider_Title,
           slider_Description: slider_Description,
           slider_Image: slider_Image,
-          product_Catagory: product_Catagory,
         });
         slider.save().then(() => {
           res.send({
@@ -110,7 +109,7 @@ route.post(
   "/slider_update",
   upload.single("slider_Image"),
   async (req, res) => {
-    const { id, slider_Title, slider_Description, product_Catagory } = req.body;
+    const { id, slider_Title, slider_Description } = req.body;
     try {
       if (req.file) {
         const slider_Image = `${process.env.URL}/slider/${req.file.filename}`;
@@ -120,7 +119,7 @@ route.post(
             slider_Image: slider_Image,
             slider_Title: slider_Title,
             slider_Description: slider_Description,
-            product_Catagory: product_Catagory,
+           
           }
         );
         if (slider) {
@@ -141,7 +140,6 @@ route.post(
           {
             slider_Title: slider_Title,
             slider_Description: slider_Description,
-            product_Catagory: product_Catagory,
           }
         );
         if (slider) {

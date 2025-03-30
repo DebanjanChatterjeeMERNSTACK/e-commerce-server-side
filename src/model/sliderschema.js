@@ -13,9 +13,6 @@ const sliderSchema = new mongoose.Schema({
     },
     slider_Description: {
         type: String
-    },
-    product_Catagory: {
-        type: String
     }
 }, {
     timestamps: true
