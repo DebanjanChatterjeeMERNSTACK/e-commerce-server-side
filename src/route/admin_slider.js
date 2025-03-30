@@ -84,24 +84,24 @@ route.get("/get_slider", async (req, res) => {
 
 
 
-route.get("/slider_edit/:id", async (req, res) => {
-  const id = req.params["id"];
-  try {
-    const slider = await Slider.findOne({ _id: id }).select('-login_id');
-    if (slider) {
-      res.send({
-        mess: "success",
-        status: 200,
-        text: "Send Success",
-        slider: slider,
-      });
-    } else {
-      res.send({ mess: "error", status: 400, text: "Please Login" });
-    }
-  } catch (err) {
-    res.send({ mess: "error", status: 400, text: err.message });
-  }
-});
+// route.get("/slider_edit/:id", async (req, res) => {
+//   const id = req.params["id"];
+//   try {
+//     const slider = await Slider.findOne({ _id: id }).select('-login_id');
+//     if (slider) {
+//       res.send({
+//         mess: "success",
+//         status: 200,
+//         text: "Send Success",
+//         slider: slider,
+//       });
+//     } else {
+//       res.send({ mess: "error", status: 400, text: "Please Login" });
+//     }
+//   } catch (err) {
+//     res.send({ mess: "error", status: 400, text: err.message });
+//   }
+// });
 
 
 
