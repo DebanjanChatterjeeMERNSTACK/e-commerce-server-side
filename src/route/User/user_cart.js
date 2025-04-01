@@ -87,3 +87,6 @@ route.post("/user_cary_delete", async (req, res) => {
     res.send({ mess: "error", status: 400, text: err.message });
   }
 });
+
+
+module.exports=route

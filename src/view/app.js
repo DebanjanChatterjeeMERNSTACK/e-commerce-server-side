@@ -16,9 +16,17 @@ const Logo=require("../route/admin_logo")
 //const Catagorypagenation = require("../route/admin_catagory_pagination")
 const CatagorySearch =require("../route/admin_catagory_search")
 const Policy =require("../route/admin_policy")
+const Faq =require("../route/admin_faq")
+const Member=require("../route/admin_member")
+
+
 const User_product=require("../route/User/user_product")
 const User_category=require("../route/User/user_category")
-const Faq =require("../route/admin_faq")
+const User_product_search=require("../route/User/user_product_search")
+const User_login=require("../route/User/user_login")
+const User_registation=require("../route/User/user_register")
+const User_cart=require("../route/User/user_cart")
+
 // const socketIO = require('socket.io');
 // const http = require("http")
 // const Products = require("../model/productSchema")
@@ -58,6 +66,9 @@ app.use("/catagory", express.static("src/catagory_image"))
 
 app.use("/logo", express.static("src/logo_image"))
 
+app.use("/member", express.static("src/member_image"))
+
+
 
 
 app.use(Registation)
@@ -89,8 +100,16 @@ app.use(CatagorySearch)
 
 app.use(Faq)
 
+app.use(Member)
+
+
+
+app.use(User_product_search)
 app.use(User_category)
 app.use(User_product)
+app.use(User_cart)
+app.use(User_login)
+app.use(User_registation)
 
 
 // io.on('connection', (socket) => {
