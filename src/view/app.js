@@ -19,6 +19,10 @@ const Policy =require("../route/admin_policy")
 const Faq =require("../route/admin_faq")
 const Member=require("../route/admin_member")
 const About =require("../route/admin_about")
+const Blog=require("../route/admin_blog")
+
+
+
 
 const User_product=require("../route/User/user_product")
 const User_category=require("../route/User/user_category")
@@ -70,6 +74,8 @@ app.use("/member", express.static("src/member_image"))
 
 app.use("/about", express.static("src/about_image"))
 
+app.use("/blog", express.static("src/blog_image"))
+
 
 
 
@@ -106,6 +112,7 @@ app.use(Member)
 
 app.use(About)
 
+app.use(Blog)
 
 
 app.use(User_product_search)
