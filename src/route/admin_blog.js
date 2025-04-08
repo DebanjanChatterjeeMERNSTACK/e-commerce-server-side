@@ -160,7 +160,7 @@ route.post(
 route.post("/blog_delete", async (req, res) => {
   const id = req.body.id;
   try {
-    const blog = await blog.findOneAndDelete({ _id: id }, { _id: id });
+    const blog = await Blog.findOneAndDelete({ _id: id }, { _id: id });
     if (blog) {
       const delete_Image = blog.blog_Image.split("/");
       fs.unlink(`src/blog_image/${delete_Image[4]}`, (err) => {

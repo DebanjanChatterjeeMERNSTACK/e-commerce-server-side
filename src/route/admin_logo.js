@@ -137,7 +137,7 @@ route.get("/logo_get", async (req, res) => {
   const login_id = req.headers["login_id"];
   try {
     if (login_id != "undefined" || login_id !== "" || !login_id) {
-      const logo = await Logo.find({ login_id: login_id })
+      const logo = await Logo.findOne({ login_id: login_id })
         .sort({
           _id: -1,
         })
