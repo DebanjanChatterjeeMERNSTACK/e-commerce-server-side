@@ -20,7 +20,7 @@ const Faq =require("../route/admin_faq")
 const Member=require("../route/admin_member")
 const About =require("../route/admin_about")
 const Blog=require("../route/admin_blog")
-
+const Payment =require("../route/admin_payament_key")
 
 
 
@@ -113,6 +113,9 @@ app.use(Member)
 app.use(About)
 
 app.use(Blog)
+
+app.use(Payment)
+
 
 
 app.use(User_product_search)

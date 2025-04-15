@@ -7,13 +7,7 @@ route.post("/add_payment_key", async (req, res) => {
   try {
     const { login_id, KEY_ID, KEY_SECRET ,Cash} = req.body;
 
-    if (!login_id && !KEY_ID && !KEY_SECRET && !Cash) {
-      return res.send({
-        mess: "error",
-        status: 400,
-        text: "Please Fill All Field",
-      });
-    }
+    if (login_id && KEY_ID && KEY_SECRET && Cash) {
     const data = await Payment.find({ login_id: login_id }).countDocuments();
     if (data == 1) {
       res.send({
@@ -36,6 +30,14 @@ route.post("/add_payment_key", async (req, res) => {
         });
       });
     }
+
+  }else{
+    res.send({
+      mess: "error",
+      status: 400,
+      text: "Please Fill All Field",
+    });
+  }
   } catch (error) {
     res.send({ mess: "error", status: 400, text: err.message });
   }
@@ -43,16 +45,11 @@ route.post("/add_payment_key", async (req, res) => {
 
 
 route.post("/payment_key_update", async (req, res) => {
-    const { id, KEY_ID, KEY_SECRET ,Cash} = req.body;
+    const { id, KEY_ID, KEY_SECRET ,Cash} = req.body.payload;
   
     try {
-        if (!id && !KEY_ID && !KEY_SECRET && !Cash) {
-            return res.send({
-              mess: "error",
-              status: 400,
-              text: "Please Fill All Field",
-            });
-          }
+        if (id && KEY_ID && KEY_SECRET && Cash) {
+           
 
       const payment = await Payment.findOneAndUpdate(
         { _id: id },
@@ -75,6 +72,14 @@ route.post("/payment_key_update", async (req, res) => {
           text: "Please Send Correct Id",
         });
       }
+
+    }else{
+        res.send({
+          mess: "error",
+          status: 400,
+          text: "Please Fill All Field",
+        });
+      }
     } catch (err) {
       res.send({ mess: "error", status: 400, text: err.message });
     }
@@ -87,7 +92,7 @@ route.post("/payment_key_update", async (req, res) => {
     try {
 
       if (login_id != "undefined" || login_id !== "" || !login_id) {
-        const Payment = await Payment.find({ login_id: login_id })
+        const Paymentdata = await Payment.findOne({ login_id: login_id })
           .sort({
             _id: -1,
           })
@@ -96,7 +101,7 @@ route.post("/payment_key_update", async (req, res) => {
           mess: "success",
           status: 200,
           text: "Send Success",
-          Payment: Payment,
+          Payments: Paymentdata,
         });
       } else {
         res.send({ mess: "error", status: 400, text: "Please Login" });
