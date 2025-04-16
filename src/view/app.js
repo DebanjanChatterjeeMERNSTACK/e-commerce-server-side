@@ -21,6 +21,7 @@ const Member=require("../route/admin_member")
 const About =require("../route/admin_about")
 const Blog=require("../route/admin_blog")
 const Payment =require("../route/admin_payament_key")
+const Flex_image=require("../route/admin_flex_image")
 
 
 
@@ -76,7 +77,7 @@ app.use("/about", express.static("src/about_image"))
 
 app.use("/blog", express.static("src/blog_image"))
 
-
+app.use("/flex",express.static("src/flex_image"))
 
 
 app.use(Registation)
@@ -116,6 +117,7 @@ app.use(Blog)
 
 app.use(Payment)
 
+app.use(Flex_image)
 
 
 app.use(User_product_search)
