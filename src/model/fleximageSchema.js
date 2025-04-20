@@ -12,7 +12,7 @@ const fleximageSchema=new mongoose.Schema({
     type:String
    },
    Flex_image_3:{
-    type:Array
+    type:String
    },
    Flex_image_4:{
     type:String

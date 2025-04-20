@@ -127,30 +127,11 @@ route.post("/update_flex_image", upload.fields([
             return res.send({
                 mess: "error",
                 status: 400,
-                text: "Document Not Found"
+                text: "Flex Image Not Found"
             });
         }
 
-        // Function to delete old image
-        const deleteOldImage = (imageUrl) => {
-            if (imageUrl) {
-                const imagePath = imageUrl.split("/").pop(); // gets the filename
-                const fullPath = path.join(__dirname, '../flex', imagePath);
-                if (fs.existsSync(fullPath)) {
-                    fs.unlink(fullPath, (err) => {
-                        if (err) console.error(`Error deleting file ${imagePath}:`, err);
-                    });
-                }
-            }
-        };
-
-        // Delete all old images
-        deleteOldImage(existingData.Flex_image_1);
-        deleteOldImage(existingData.Flex_image_2);
-        deleteOldImage(existingData.Flex_image_3);
-        deleteOldImage(existingData.Flex_image_4);
-
-        // Process new images
+       
         const Flex_image_1 = req.files["Flex_image_1"][0].filename;
         const Flex_image_2 = req.files["Flex_image_2"][0].filename;
         const Flex_image_3 = req.files["Flex_image_3"][0].filename;
@@ -169,10 +150,30 @@ route.post("/update_flex_image", upload.fields([
                 Flex_image_2: flex2,
                 Flex_image_3: flex3,
                 Flex_image_4: flex4,
-            },
-            { new: true } // returns the updated document
+            }
         );
    if(data){
+
+  const delete_Image1 = data.Flex_image_1.split("/");
+      fs.unlink(`src/flex_image/${delete_Image1[4]}`, (err) => {
+        if (err) console.error("Error deleting image 1:", err);
+    });
+
+      const delete_Image2 = data.Flex_image_2.split("/");
+      fs.unlink(`src/flex_image/${delete_Image2[4]}`, (err) => {
+        if (err) console.error("Error deleting image 2:", err);
+    });
+
+      const delete_Image3 = data.Flex_image_3.split("/");
+      fs.unlink(`src/flex_image/${delete_Image3[4]}`, (err) => {
+        if (err) console.error("Error deleting image 3:", err);
+    });
+
+      const delete_Image4 = data.Flex_image_4.split("/");
+      fs.unlink(`src/flex_image/${delete_Image4[4]}`, (err) => {
+        if (err) console.error("Error deleting image 4:", err);
+    });
+
     res.send({
         mess: "success",
         status: 200,
