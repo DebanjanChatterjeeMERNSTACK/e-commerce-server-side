@@ -21,8 +21,8 @@ route.post("/user_login",async(req,res)=>{
                     if(err){
                         res.send({ mess: "error",status: 400, text: err.message });
                     }else{
-                        res.send({ mess: "success",status: 200, text: "Login Complete", id:data._id ,token:token });
-                        res.cookie("token", token, {
+                        res.send({ mess: "success",status: 200, text: "Login Complete", user_id:data._id ,user_token:token });
+                        res.cookie("user_token", token, {
                             httpOnly: true, // Prevents access via JavaScript
                             secure: true, // Use only in HTTPS
                             sameSite: "Strict", // CSRF protection
