@@ -8,6 +8,9 @@ const logoSchema = new mongoose.Schema({
     logo: {
         type: String
     },
+    title:{
+        type:String
+    }
 }, {
     timestamps: true
 })

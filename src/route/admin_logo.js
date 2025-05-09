@@ -22,7 +22,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 route.post("/logo_save", upload.single("logo_Image"), async (req, res) => {
-  const { login_id } = req.body;
+  const { login_id, title } = req.body;
+
 
   try {
     if (login_id) {
@@ -40,6 +41,7 @@ route.post("/logo_save", upload.single("logo_Image"), async (req, res) => {
           const logo = await Logo({
             login_id: login_id,
             logo: Logo_image,
+            title:title
           });
           logo.save().then(() => {
             res.send({
@@ -64,43 +66,44 @@ route.post("/logo_save", upload.single("logo_Image"), async (req, res) => {
   }
 });
 
-route.get("/logo_edit/:id", async (req, res) => {
-  const id = req.params["id"];
-  try {
-    const logo = await Logo.findOne({ _id: id }).select("-login_id");
-    if (logo) {
-      res.send({
-        mess: "success",
-        status: 200,
-        text: "Send Success",
-        logo: logo,
-      });
-    } else {
-      res.send({
-        mess: "error",
-        status: 400,
-        text: "Please Send Correct Id",
-      });
-    }
-  } catch (err) {
-    res.send({ mess: "error", status: 400, text: err.message });
-  }
-});
+// route.get("/logo_edit/:id", async (req, res) => {
+//   const id = req.params["id"];
+//   try {
+//     const logo = await Logo.findOne({ _id: id }).select("-login_id");
+//     if (logo) {
+//       res.send({
+//         mess: "success",
+//         status: 200,
+//         text: "Send Success",
+//         logo: logo,
+//       });
+//     } else {
+//       res.send({
+//         mess: "error",
+//         status: 400,
+//         text: "Please Send Correct Id",
+//       });
+//     }
+//   } catch (err) {
+//     res.send({ mess: "error", status: 400, text: err.message });
+//   }
+// });
 
 route.post(
   "/logo_update",
   upload.single("logo_Image"),
   async (req, res) => {
-    const { id } = req.body;
+    const { id , title} = req.body;
 
     try {
-     
+      if(req.file){
         const logo = `${process.env.URL}/logo/${req.file.filename}`;
 
         const logoUpdate = await Logo.findOneAndUpdate(
           { _id: id },
           {
             logo: logo,
+            title:title
           }
         );
 
@@ -125,6 +128,29 @@ route.post(
             text: "Please Send Correct Id",
           });
         }
+      }else{
+          const logoUpdate = await Logo.findOneAndUpdate(
+          { _id: id },
+          {
+            title:title
+          }
+        );
+
+        if (logoUpdate) {
+              res.send({
+                mess: "success",
+                status: 200,
+                text: "Title Update Successfull",
+              });
+            
+        } else {
+          res.send({
+            mess: "error",
+            status: 400,
+            text: "Please Send Correct Id",
+          });
+        }
+      }
     } catch (err) {
       res.send({ mess: "error", status: 400, text: err.message });
     }
