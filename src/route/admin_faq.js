@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const Faq = require("../model/faq");
+const Faq = require("../model/faqSchema");
 
 route.post("/add_faq", async (req, res) => {
   const { login_id, Question, Answer } = req.body;

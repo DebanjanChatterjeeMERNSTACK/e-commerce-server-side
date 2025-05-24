@@ -1,4 +1,4 @@
-const Policy = require("../model/policy");
+const Policy = require("../model/policySchema");
 const express = require("express");
 const route = express.Router();
 

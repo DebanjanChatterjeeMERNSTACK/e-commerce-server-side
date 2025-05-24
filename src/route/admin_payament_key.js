@@ -5,28 +5,29 @@ const middleware = require("../middleware/middleware");
 
 route.post("/add_payment_key", async (req, res) => {
   try {
-    const { login_id, KEY_ID, KEY_SECRET ,Cash} = req.body;
+    const { login_id, Tax, delivery_Charge ,Cash} = req.body;
+    console.log(req.body)
 
-    if (login_id && KEY_ID && KEY_SECRET && Cash) {
+    if (login_id && Tax && delivery_Charge) {
     const data = await Payment.find({ login_id: login_id }).countDocuments();
     if (data == 1) {
       res.send({
         mess: "error",
         status: 400,
-        text: "You Have Already Submit Your Payment Key ",
+        text: "You Have Already Submit Your Payment Details ",
       });
     } else {
       const payment = await Payment({
         login_id: login_id,
-        KEY_ID: KEY_ID,
-        KEY_SECRET: KEY_SECRET,
+        Tax: Tax,
+        delivery_Charge: delivery_Charge,
         Cash:Cash
       });
       payment.save().then(() => {
         res.send({
           mess: "success",
           status: 200,
-          text: "Payment Key Save Successfull",
+          text: "Payment Details Save Successfull",
         });
       });
     }
@@ -38,24 +39,24 @@ route.post("/add_payment_key", async (req, res) => {
       text: "Please Fill All Field",
     });
   }
-  } catch (error) {
+  } catch (err) {
     res.send({ mess: "error", status: 400, text: err.message });
   }
 });
 
 
 route.post("/payment_key_update", async (req, res) => {
-    const { id, KEY_ID, KEY_SECRET ,Cash} = req.body.payload;
+    const { id, delivery_Charge, Tax ,Cash} = req.body.payload;
   
     try {
-        if (id && KEY_ID && KEY_SECRET && Cash) {
+        if (id && Tax && delivery_Charge ) {
            
 
       const payment = await Payment.findOneAndUpdate(
         { _id: id },
        { 
-        KEY_ID: KEY_ID,
-        KEY_SECRET: KEY_SECRET,
+        Tax: Tax,
+        delivery_Charge: delivery_Charge,
         Cash:Cash
        }
       );
@@ -63,7 +64,7 @@ route.post("/payment_key_update", async (req, res) => {
         res.send({
           mess: "success",
           status: 200,
-          text: "Payment Key Update Successfull",
+          text: "Payment Details Update Successfull",
         });
       } else {
         res.send({

@@ -5,11 +5,11 @@ const paymentSchema = new mongoose.Schema({
     login_id: {
         type: String
     },
-    KEY_ID: {
-        type: String
+    delivery_Charge: {
+        type: Number
     },
-    KEY_SECRET: {
-        type: String
+    Tax: {
+        type: Number
     },
     Cash:{
         type:Boolean
