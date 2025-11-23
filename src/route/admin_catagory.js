@@ -1,7 +1,6 @@
 const express = require("express");
 const route = express.Router();
 const Catagory = require("../model/categorySchema");
-const catagory_middileware = require("../middleware/catagory_middileware");
 const middleware = require("../middleware/middleware");
 const multer = require("multer");
 const fs = require("fs");
@@ -24,28 +23,29 @@ const upload = multer({ storage: storage });
 //  catagory_middileware
 route.post(
   "/catagory_save",
-  catagory_middileware,
   upload.single("product_Catagory_Image"),
-  
+
   async (req, res) => {
-    const {
-      login_id,
-      product_Catagory_Name,
-      product_Meta_Title,
-      product_Meta_Description,
-      product_Meta_Keywords,
-      product_Category_slug,
-      product_Category_order,
-      product_Category_image_menu,
-      product_Category_main_menu
-    } = req.body;
+    const { login_id, product_Catagory_Name } = req.body;
+    console.log(login_id);
     const product_SubCategory_Name = JSON.parse(
       req.body.product_SubCategory_Name
     );
-    
-    
+
     try {
       if (login_id) {
+        const Product_Catagory_Name = await Catagory.findOne({
+          product_Catagory_Name: product_Catagory_Name,
+        });
+
+        if (Product_Catagory_Name) {
+          return res.send({
+            mess: "error",
+            status: 400,
+            text: "Catagory Have Same Name, Delete Permanently",
+          });
+        }
+
         if (req.file) {
           const product_Catagory_Image = `${process.env.URL}/catagory/${req.file.filename}`;
 
@@ -54,13 +54,6 @@ route.post(
             product_Catagory_Name: product_Catagory_Name,
             product_Catagory_Image: product_Catagory_Image,
             product_SubCategory_Name: product_SubCategory_Name,
-            product_Meta_Title: product_Meta_Title,
-            product_Meta_Description: product_Meta_Description,
-            product_Meta_Keywords: product_Meta_Keywords,
-            product_Category_slug: product_Category_slug,
-            product_Category_order: product_Category_order,
-            product_Category_image_menu: product_Category_image_menu,
-            product_Category_main_menu:product_Category_main_menu
           });
           catagory.save().then(() => {
             res.send({
@@ -112,17 +105,7 @@ route.post(
   "/catagory_update",
   upload.single("product_Catagory_Image"),
   async (req, res) => {
-    const {
-      id,
-      product_Catagory_Name,
-      product_Meta_Title,
-      product_Meta_Description,
-      product_Meta_Keywords,
-      product_Category_slug,
-      product_Category_order,
-      product_Category_image_menu,
-      product_Category_main_menu
-    } = req.body;
+    const { id, product_Catagory_Name } = req.body;
     const product_SubCategory_Name = JSON.parse(
       req.body.product_SubCategory_Name
     );
@@ -136,13 +119,6 @@ route.post(
             product_Catagory_Name: product_Catagory_Name,
             product_Catagory_Image: product_Catagory_Images,
             product_SubCategory_Name: product_SubCategory_Name,
-            product_Meta_Title: product_Meta_Title,
-            product_Meta_Description: product_Meta_Description,
-            product_Meta_Keywords: product_Meta_Keywords,
-            product_Category_slug: product_Category_slug,
-            product_Category_order: product_Category_order,
-            product_Category_image_menu: product_Category_image_menu,
-            product_Category_main_menu:product_Category_main_menu
           }
         );
 
@@ -173,13 +149,6 @@ route.post(
           {
             product_Catagory_Name: product_Catagory_Name,
             product_SubCategory_Name: product_SubCategory_Name,
-            product_Meta_Title: product_Meta_Title,
-            product_Meta_Description: product_Meta_Description,
-            product_Meta_Keywords: product_Meta_Keywords,
-            product_Category_slug: product_Category_slug,
-            product_Category_order: product_Category_order,
-            product_Category_image_menu: product_Category_image_menu,
-            product_Category_main_menu:product_Category_main_menu
           }
         );
 

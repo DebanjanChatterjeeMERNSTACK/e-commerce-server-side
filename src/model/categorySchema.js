@@ -14,27 +14,6 @@ const catagorySchema=new mongoose.Schema({
    product_SubCategory_Name:{
     type:Array
    },
-   product_Meta_Title:{
-    type:String
-   },
-   product_Meta_Description:{
-    type:String
-   },
-   product_Meta_Keywords:{
-    type:String
-   },
-   product_Category_slug:{
-    type:String
-   },
-   product_Category_order:{
-    type:String
-   },
-   product_Category_image_menu:{
-    type:String
-   },
-   product_Category_main_menu:{
-    type:String
-   },
    product_Catagory_Delete:{
     type:Number,
     default:0
